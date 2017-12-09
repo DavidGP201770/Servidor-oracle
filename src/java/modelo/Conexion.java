@@ -8,11 +8,11 @@ import java.sql.*;
 
 public class Conexion 
 {
-    public static Connection conectarse(String login, String password)
+    public static Connection conectarse(String login, String password) throws ClassNotFoundException, SQLException
     {
         
         Connection con=null;
-        try{
+        
         //paso 1 escribir la url de conexion
         String url="jdbc:oracle:thin:@localhost:1521:xe";
       
@@ -21,10 +21,6 @@ public class Conexion
         //paso 3 nos autenticamos
         con=DriverManager.getConnection(url, login, password);
             System.out.println("Conectadito");
-            
-        }catch(Exception e){
-            System.out.println("Hubo un error "+e.getMessage());
-        }
         
         return con;
     }

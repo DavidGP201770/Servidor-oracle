@@ -9,8 +9,38 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bootstrap.css">
+        <script src="jquery-3.2.1.min.js" ></script>
+
     </head>
     <body>
         <h1> Ya estas Autenticado</h1>
+        <input type="text" placeholder="numero de almacen" id="texto1">
+        <input type="text" placeholder="ubicacion " id="texto2">
+        <button class="btn btn-dark" id="boton"> Oprime el boton </button>
+        <div class="alert-info" id="resultado">
+            Oprime el boton
+        </div>
+        <script>
+            // pondremos el hola mundo de javascript con jquery
+            //alert(" Mi primer hola mundo de javascript ");
+            console.log("salida a  la consola");
+            //clase interna anonima con javascript para dar funcionalidad al boton
+            $("#boton").click(function () {
+                var numero = $("#texto1").val();
+                var ubicacion = $("#texto2").val();
+                //hacemos una llamada al servicio del servlet almacen
+                $.ajax('http://localhost:8090/servidor-oracle/guardar-almacen', {
+                    type: 'post',
+                    data: {
+                        numero: numero,
+                        ubicacion: ubicacion
+                    }, success: function (datos) {
+                        $("#resultado").html(datos);
+                    }
+                });
+
+            });
+        </script>
     </body>
 </html>

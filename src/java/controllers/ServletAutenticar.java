@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
+import modelo.Conexion;
 /**
  *
  * @author DUGPLPW7
@@ -26,11 +27,18 @@ public class ServletAutenticar extends HttpServlet {
         String password=request.getParameter("password");
         
         System.out.println("Los datos son: "+login+"El pswd "+password);
-        
+        try{
+        Conexion.conectarse(login, password);
     //El servlet hace el ruteamiento como sigue
     RequestDispatcher despachador=request.getRequestDispatcher("/bienvenido.html");
-    
     //El despachador la routea
     despachador.forward(request, response);
+    
+        }catch(Exception e){
+            System.out.println("aasasasa"+e.getMessage());
+        RequestDispatcher despachador=request.getRequestDispatcher("/error.html");
+        despachador.forward(request, response);
+        }
+   
     }
 }
